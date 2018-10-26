@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -e
+set -o pipefail
+set -u
+
+cd /src
+
+NAME=bob
+
+echo "building with GOOS=darwin GOARCH=386 ..."
+GOOS=darwin GOARCH=386 go build -o /output/${NAME}_darwin_386
+
+echo "building with GOOS=darwin GOARCH=amd64 ..."
+GOOS=darwin GOARCH=amd64 go build -o /output/${NAME}_darwin_amd64
+
+echo "building with GOOS=linux GOARCH=386 ..."
+GOOS=linux GOARCH=386 go build -o /output/${NAME}_linux_386
+
+echo "building with GOOS=linux GOARCH=amd64 ..."
+GOOS=linux GOARCH=amd64 go build -o /output/${NAME}_linux_amd64

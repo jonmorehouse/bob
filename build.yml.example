@@ -1,0 +1,32 @@
+---
+name: example
+
+# multiple builds can be configured per program, and the CLI allows only
+# building one at a time
+builds:
+  # a docker image published to docker.io
+  - kind: docker-public
+    latest: true
+    labels:
+      - house.jm.timestamp:${TIMESTAMP}
+      - house.jm.repository:github.com:/jonmorehouse/workspace
+      - house.jm.git_ref:${GIT_REF}
+
+  # a docker image published to the internal docker registry
+  - kind: docker-internal
+    latest: true
+    labels:
+      - house.jm.timestamp:$TIMESTAMP
+      - house.jm.repository:github.com:/jonmorehouse/workspace
+      - house.jm.git_ref:$GIT_REF
+
+  # an oci compatible image and manifest that is stored on the artifacts
+  # server, normally at `artifacts.jm.house/oci-static-srv-server`
+  - kind: oci
+    todo: true
+
+  # a go binary gets published to the artifacts server configured by the
+  # builder, in this case it would end up at `artifacts.jm.house/static-srv-server/...`
+  - kind: binary
+    latest: true
+    dockerfile: Dockerfile.build

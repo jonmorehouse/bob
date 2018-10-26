@@ -1,0 +1,11 @@
+FROM golang:latest
+
+RUN go get golang.org/x/crypto/openpgp && \
+	go get gopkg.in/yaml.v2
+
+COPY build /build
+COPY ./src /src
+COPY ./lib /golib
+
+RUN mkdir -p /go/src/github.com/jonmorehouse && \
+      cp -r /golib/safe /go/src/github.com/jonmorehouse/safe

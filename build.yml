@@ -1,0 +1,15 @@
+---
+name: bob
+builds:
+  - kind: bundle
+    dockerfile: Dockerfile.build
+
+  - kind: docker-public
+    latest: true
+    labels:
+      house.jm.timestamp: ${TIMESTAMP}
+      house.jm.repository: github.com:/jonmorehouse/workspace
+      house.jm.git_ref: ${GIT_REF}
+      house.jm.git_short_ref: ${GIT_SHORT_REF}
+
+  #- kind: docker-local
